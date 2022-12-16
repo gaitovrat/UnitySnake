@@ -51,7 +51,7 @@ namespace Assets.Scritps
 
         public void MoveRight() 
         {
-            MoveX(-1);
+            MoveX(1);
         }
 
         public float Speed { get; set; }
