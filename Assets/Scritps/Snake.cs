@@ -12,36 +12,46 @@ namespace Assets.Scritps
 
         public Snake(Transform transform) : this(transform, 0.01f) { }
 
-        public void MoveUp()
+        public void Move(float x, float y) 
+        {
+            MoveX(x);
+            MoveY(y);
+        }
+
+        public void MoveX(float x) 
         {
             var position = _transform.position;
 
-            position.y += Speed;
+            position.x += x * Speed;
             _transform.position = position;
+        }
+
+        public void MoveY(float y) 
+        {
+            var position = _transform.position;
+
+            position.y += y * Speed;
+            _transform.position = position;
+        }
+
+        public void MoveUp()
+        {
+            MoveY(1);
         }
 
         public void MoveDown() 
         {
-            var position = _transform.position;
-
-            position.y -= Speed;
-            _transform.position = position;
+            MoveY(-1);
         }
 
         public void MoveLeft() 
         {
-            var position = _transform.position;
-
-            position.x += Speed;
-            _transform.position = position;
+            MoveX(-1);
         }
 
         public void MoveRight() 
         {
-            var position = _transform.position;
-
-            position.x -= Speed;
-            _transform.position = position;
+            MoveX(-1);
         }
 
         public float Speed { get; set; }
