@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _transform = GetComponent<Transform>();
         _snake = new(_transform, _speed);
+
+        gameObject.GetComponent<Player>().Actor = _snake;
     }
 
     private void FixedUpdate()
@@ -19,13 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
         _snake.Move(xAxis, yAxis);
     }
-
-    private void OnBecameInvisible()
-    {
-        Game.GameOver();
-    }
-
-    public GameManager Game { private get; set; }
 
     private Transform _transform;
     private Snake _snake;

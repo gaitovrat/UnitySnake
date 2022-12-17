@@ -237,8 +237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1850904205}
-  _fruitPrefab: {fileID: 121430962386220993, guid: 4e93f4968322a8b44a06c4d63e4f57c1, type: 3}
-  _playerPrefab: {fileID: 5104113999835014771, guid: eba6c56477999a843b7359e7fb45ae61, type: 3}
+  _fruitPrefab: {fileID: 6282793885031431424, guid: c3966385b04119b499f10fcc3e42c3b2, type: 3}
+  _playerPrefab: {fileID: 1698856742500441783, guid: a769d0da9822d0741ae300b81127468b, type: 3}
+  _camera: {fileID: 519420031}
 --- !u!4 &1068118180
 Transform:
   m_ObjectHideFlags: 0

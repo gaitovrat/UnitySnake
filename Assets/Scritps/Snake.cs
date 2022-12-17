@@ -2,7 +2,7 @@
 
 namespace Assets.Scritps
 {
-    internal sealed class Snake
+    public sealed class Snake
     {
         public Snake(Transform transform, float speed)
         {

@@ -10,40 +10,45 @@ public class GameManager : MonoBehaviour
     private GameObject _fruitPrefab;
     [SerializeField]
     private GameObject _playerPrefab;
+    [SerializeField]
+    private Camera _camera;
 
     private void Start()
     {
         Debug.Log("Game is started.");
 
-        Instantiate(_fruitPrefab);
         CreatePlayer();
+        SpawnFruit();
+
+        _isGameOver = false;
+    }
+
+    public void UpdatePoints(int points)
+    {
+        _text.text = $"Points: {points}";
     }
 
     public void GameOver()
     {
         Destroy(_playerInstance);
+        Destroy(_fruitInstance);
+
+        _isGameOver = true;
         _text.text = "Game over";
     }
 
     public void Restart()
     {
-        if (_playerInstance.IsDestroyed())
-        {
-            CreatePlayer();
-        }
-        else
-        {
-            _playerInstance.GetComponent<Transform>().position = Vector3.zero;
-        }
+        CreatePlayer();
+        SpawnFruit();
+        UpdatePoints(0);
 
-        _text.text = "Points: 0";
+        _isGameOver = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        var submit = Input.GetAxis("Submit");
-
-        if (submit > 0)
+        if (Input.GetKeyDown(KeyCode.Return) && _isGameOver)
         {
             Restart();
         }
@@ -52,8 +57,16 @@ public class GameManager : MonoBehaviour
     private void CreatePlayer()
     {
         _playerInstance = Instantiate(_playerPrefab);
-        _playerInstance.GetComponentInChildren<PlayerMovement>().Game = this;
+        _playerInstance.GetComponent<Player>().Game = this;
+    }
+
+    public void SpawnFruit()
+    {
+        Vector3 screenPosition = _camera.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
+        _fruitInstance = Instantiate(_fruitPrefab, screenPosition, Quaternion.identity);
     }
 
     private GameObject _playerInstance;
+    private GameObject _fruitInstance;
+    private bool _isGameOver;
 }
